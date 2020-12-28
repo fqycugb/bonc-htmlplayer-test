@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .App{
+            float: left;
+        }
+        .control{
+            float: left;
+            margin-left: 20px;
+        }
+        .play{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="App">
+        
+          <video style='width:800px;height:600px;background-color: black;'  id="playerid"></video> 
+        <div>
+          <!-- <button  class='controlbutton' onclick='playVideo()' id="playbtn" >播放视频</button> -->
+        </div>
+    </div>
+    <div class="control">
+        <div>
+            <h1>方案一：输入摄像头信息</h1>
+            <textarea class="deviceInfo"  >
+
+            </textarea>
+            <button class="play">播放视频</button>
+        </div>
+        <div>
+            <h1>方案一：输入摄像头信息</h1>
+            <textarea>
+
+            </textarea>
+            <button class="play">播放视频</button>
+        </div>
+    </div>
+    <script src='./BoncH5Player.js'></script>
+    <script>
+        var configs = {
+            videoId : 'playerid',
+            // channelId:'6e919186773c4144b66f180c48504dc3-0000'
+        }
+        var _player = new  BoncH5Player.default(configs)
+        function search(){
+            const param = {
+                channelId: "b67c80894b51464dba5ed6bf3a1ef6ab-0000",
+                endTime: "12/3/2020, 6:27:50 PM",
+                startTime: "12/3/2020, 5:27:50 PM",
+                streamServerIP: "10.1.100.83",
+                streamServerPort: "10090",
+            }
+            _player.searchRecord(param)
+        }
+        _player.on('onRecordInfo', (res) => {
+            console.log('查询录像结果的回调')
+            // debugger
+        })
+        function playVideo(){
+            var channelInfo2 = {
+            ChannelNum: "0",
+            // DeviceIP: "192.168.1.202",
+            DeviceIP: "172.16.67.253",
+            DevicePort: "554",
+            DeviceType: "1101",
+            
+            StreamServerIP: "172.16.96.165",
+            StreamServerPort: "10088",
+            // StreamServerPort: "10090",
+            UserName: "admin",
+            PassWord: "bonc123456",
+            // UserName: "aaa",
+            // PassWord: "aaa",
+        }
+            this._player.openVideo(channelInfo2);
+        }
+        function closeVideo(){
+            this._player.closeVideo();
+        }
+    </script>
+    
+</body>
+</html>
